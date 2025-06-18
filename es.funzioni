@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+// Funzione che calcola il quadrato di un numero
+int quadrato(int num) {
+    return num * num;
+}
+
+// Funzione che restituisce il maggiore tra due numeri
+int maggiore(int a, int b) {
+    if (a > b)
+        return a;
+    else
+        return b;
+}
+
+int main() {
+    int num1, num2;
+
+    // Chiedi all'utente di inserire due numeri interi
+    printf("Inserisci il primo numero intero: ");
+    scanf("%d", &num1);
+    printf("Inserisci il secondo numero intero: ");
+    scanf("%d", &num2);
+
+    // Calcola e stampa il quadrato di ciascun numero
+    printf("Il quadrato di %d è %d\n", num1, quadrato(num1));
+    printf("Il quadrato di %d è %d\n", num2, quadrato(num2));
+
+    // Calcola e stampa quale dei due numeri è maggiore
+    printf("Il numero maggiore tra %d e %d è %d\n", num1, num2, maggiore(num1, num2));
+
+    return 0;
+}
