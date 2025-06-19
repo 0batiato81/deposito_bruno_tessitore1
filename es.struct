@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Definisce una struct chiamata Macchina
+typedef struct {
+    char modello[31]; // Stringa, massimo 30 caratteri + terminatore null
+    int anno;         // Intero
+} Macchina;
+
+int main() {
+    int num_macchine;
+    Macchina *parco_macchine; // Puntatore per l'array di struct
+
+    // Chiede all'utente quante macchine vuole inserire (max 50)
+    do {
+        printf("Quante macchine vuoi inserire? (massimo 50): ");
+        scanf("%d", &num_macchine);
+        // Consuma il carattere newline rimasto dopo scanf
+        while (getchar() != '\n'); 
+        if (num_macchine <= 0 || num_macchine > 50) {
+            printf("Numero non valido. Inserisci un valore tra 1 e 50.\n");
+        }
+    } while (num_macchine <= 0 || num_macchine > 50);
+
+    // Alloca dinamicamente memoria per l'array di struct
+    parco_macchine = (Macchina *)malloc(num_macchine * sizeof(Macchina));
+    if (parco_macchine == NULL) {
+        printf("Errore di allocazione della memoria!\n");
+        return 1; // Termina il programma con un errore
+    }
+
+    // Per ogni macchina, chiede modello e anno
+    for (int i = 0; i < num_macchine; i++) {
+        printf("\nInserisci i dati per la macchina %d:\n", i + 1);
+        printf("Modello (massimo 30 caratteri): ");
+        // Legge la stringa, evitando overflow e problemi con spazi
+        fgets(parco_macchine[i].modello, sizeof(parco_macchine[i].modello), stdin);
+        // Rimuove il newline aggiunto da fgets se presente
+        parco_macchine[i].modello[strcspn(parco_macchine[i].modello, "\n")] = 0;
+
+        printf("Anno: ");
+        scanf("%d", &parco_macchine[i].anno);
+        // Consuma il carattere newline rimasto dopo scanf per il prossimo fgets
+        while (getchar() != '\n'); 
+    }
+
+    // Alla fine, stampa tutte le macchine inserite
+    printf("\n--- Macchine inserite ---\n");
+    for (int i = 0; i < num_macchine; i++) {
+        printf("Macchina %d:\n", i + 1);
+        printf("  Modello: %s\n", parco_macchine[i].modello);
+        printf("  Anno: %d\n", parco_macchine[i].anno);
+    }
+
+   
