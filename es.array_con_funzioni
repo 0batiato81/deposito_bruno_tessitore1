@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+void leggiNumeri(int arr[], int size) {
+    printf("Inserisci %d numeri:\n", size);
+    for (int i = 0; i < size; i++) {
+        printf("Numero %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+}
+
+float calcolaMedia(int arr[], int size) {
+    if (size == 0) {
+        return 0.0;
+    }
+    int somma = 0;
+    for (int i = 0; i < size; i++) {
+        somma += arr[i];
+    }
+    return (float)somma / size;
+}
+
+int contaNumeriSopraMedia(int arr[], int size, float media) {
+    int contatore = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] > media) {
