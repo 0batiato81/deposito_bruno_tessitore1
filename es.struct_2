@@ -1,0 +1,61 @@
+#include <stdio.h>    
+#include <string.h>   
+
+
+struct Contatto {
+    char nome[31];    
+    char telefono[16]; 
+};
+
+int main() {
+    struct Contatto rubrica[20]; 
+    int numContatti;             
+    char nomeDaCercare[31];     
+    int i;                       
+    int trovato = 0;             
+
+    
+
+    
+    do {
+        printf("Quanti contatti vuoi inserire (max 20)? ");
+        scanf("%d", &numContatti);
+        
+        while (getchar() != '\n'); 
+        if (numContatti <= 0 || numContatti > 20) {
+            printf("Numero di contatti non valido. Inserisci un valore tra 1 e 20.\n");
+        }
+    } while (numContatti <= 0 || numContatti > 20);
+
+    
+    for (i = 0; i < numContatti; i++) {
+        printf("\nInserisci i dati per il Contatto %d:\n", i + 1);
+        printf("Nome (max 30 caratteri): ");
+        
+        scanf(rubrica[i].nome, sizeof(rubrica[i].nome), stdin);
+        
+        rubrica[i].nome[strcspn(rubrica[i].nome, "\n")] = '\0';
+
+        printf("Telefono (max 15 caratteri): ");
+        fgets(rubrica[i].telefono, sizeof(rubrica[i].telefono), stdin);
+        
+        rubrica[i].telefono[strcspn(rubrica[i].telefono, "\n")] = '\0';
+    }
+
+    
+    printf("\n--- Ricerca Contatto ---\n");
+    printf("Inserisci il nome del contatto da cercare: ");
+    scanf(nomeDaCercare, sizeof(nomeDaCercare), stdin);
+    nomeDaCercare[strcspn(nomeDaCercare, "\n")] = '\0'; 
+
+    
+    for (i = 0; i < numContatti; i++) {
+        
+        if (strcmp(rubrica[i].nome, nomeDaCercare) == 0) {
+            printf("Contatto trovato! Telefono: %s\n", rubrica[i].telefono);
+            trovato = 1; 
+            break;       
+        }
+    }
+
+}
